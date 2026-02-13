@@ -60,7 +60,7 @@ export default function DailyBestSells() {
     },
 
   {
-  img: "https://minio.appconnect.cloud/vitalimes-images/uploads/Black_lemon_dry.png",
+  img: "https://minio.vitalimes.com/vitalimes-images/uploads/Black_lemon_dry.png",
   title: "Black Lemon",
   description: [
     "Dried black lemons for recipes",
