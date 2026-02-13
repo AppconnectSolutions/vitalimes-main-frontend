@@ -11,7 +11,7 @@ export default function AllProducts() {
 
   // MinIO public bucket config
   const MINIO_PUBLIC_URL =
-    import.meta.env.VITE_MINIO_PUBLIC_URL || "https://minio.appconnect.cloud";
+    import.meta.env.VITE_MINIO_PUBLIC_URL || "https://minio.vitalimes.com";
   const MINIO_BUCKET = import.meta.env.VITE_MINIO_BUCKET || "vitalimes-images";
 
   // Convert DB filename -> full MinIO URL
