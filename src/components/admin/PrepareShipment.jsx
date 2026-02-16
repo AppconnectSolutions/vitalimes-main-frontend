@@ -78,7 +78,7 @@ export default function PrepareShipment() {
       };
 
       const res = await axios.post(
-        "https://api.appconnect.cloud/api/shipments/create",
+        "https://api.vitalimes.com/api/shipments/create",
         payload
       );
 
