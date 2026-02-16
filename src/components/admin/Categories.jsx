@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Edit2, Trash2 } from "react-feather";
 
 export default function Categories() {
-  const API_URL = import.meta.env.VITE_API_URL || "https://api.appconnect.cloud";
+  const API_URL = import.meta.env.VITE_API_URL || "https://api.vitalimes.com";
   const navigate = useNavigate();
 
   const [allCategories, setAllCategories] = useState([]);
@@ -16,9 +16,11 @@ export default function Categories() {
   const entriesPerPage = 8;
 
   // ✅ MinIO public base URL (bucket path)
-  const MINIO_PUBLIC_BASE = useMemo(() => {
-    return "https://minio.appconnect.cloud/vitalimes-images";
-  }, []);
+  // ✅ MinIO public base URL (bucket path)
+const MINIO_PUBLIC_BASE = useMemo(() => {
+  return "https://minio.vitalimes.com/vitalimes-images";
+}, []);
+
 
   // ✅ ZERO-network fallback image (always works)
   const FALLBACK_IMG = useMemo(() => {
