@@ -27,9 +27,9 @@ export default function PrepareShipment() {
   const loadOrder = async () => {
     try {
       const res = await axios.get(
-        `https://api.vitalimes.com/api/orders/get/${order_no}`,
-        { headers: { "Cache-Control": "no-cache" } }
+      `https://api.vitalimes.com/api/orders/get/${order_no}`
       );
+
 
       if (res.data.success) {
         setOrder(res.data.order);
