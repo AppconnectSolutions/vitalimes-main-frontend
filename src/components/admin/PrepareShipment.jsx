@@ -27,7 +27,7 @@ export default function PrepareShipment() {
   const loadOrder = async () => {
     try {
       const res = await axios.get(
-        `https://api.appconnect.cloud/api/orders/get/${order_no}`,
+        `https://api.vitalimes.com/api/orders/get/${order_no}`,
         { headers: { "Cache-Control": "no-cache" } }
       );
 
