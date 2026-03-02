@@ -77,7 +77,7 @@ export default function Footers() {
     Kovilpatti – 628503
   </p>
 
-  <p className="footer-text">Phone: +91-9042417179</p>
+  <p className="footer-text">Phone: +91-8072812904</p>
   <p className="footer-text">Email: contact@vitalimes.com</p>
 
   {/* SUBSCRIBE */}
