@@ -67,6 +67,7 @@ import LemonRicePremium from "./components/users/LemonRicePremium.jsx";
 import LemonJuiceRecipe from "./components/users/LemonJuiceRecipe.jsx";
 import HealthyDish from "./components/users/HealthyDish";
 import BlackLemonUses from "./components/users/BlackLemonUses";
+import NannariSection from "./components/users/LemonJuiceRecipe";
 
 
 /* ---------------- USER LAYOUT ---------------- */
@@ -142,6 +143,7 @@ function App() {
 <Route path="/recipes/green-juice" element={<LemonJuiceRecipe />} />
 <Route path="/recipes/black-lemon" element={<BlackLemonUses />} />
 <Route path="/recipes/healthy-dish" element={<HealthyDish />} />
+<Route path="/recipes/nannari-lemon" element={<NannariSection />} />
             {/* PRODUCT DETAILS */}
             <Route path="product/:id" element={<ProductDetails />} />
 

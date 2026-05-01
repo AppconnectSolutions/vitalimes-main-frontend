@@ -41,7 +41,7 @@ export default function Footers() {
               <li><a href="/products">Dried Lemon</a></li>
               <li><a href="/products">Lemon Oil</a></li>
               <li><a href="/products">Skin Care</a></li>
-              <li><a href="/products">Metal Cleaning Powder</a></li>
+              <li><a href="/products">Instant Drink Powder</a></li>
             </ul>
           </div>
 
@@ -78,7 +78,7 @@ export default function Footers() {
   </p>
 
   <p className="footer-text">Phone: +91-8072812904</p>
-  <p className="footer-text">Email: contact@vitalimes.com</p>
+  <p className="footer-text">Email: info@vitalimes.com</p>
 
   {/* SUBSCRIBE */}
   <div className="d-flex mt-3">
@@ -113,10 +113,10 @@ export default function Footers() {
     <a className="social-btn" href="https://instagram.com">
       <i className="bi bi-instagram"></i>
     </a>
-    <a className="social-btn" href="https://youtube.com">
+    <a className="social-btn" href="https://youtu.be/0LCfK7hoTsA?si=_nROrYG6iUbruXaS">
       <i className="bi bi-youtube"></i>
     </a>
-    <a className="social-btn" href="https://linkedin.com">
+    <a className="social-btn" href="https://www.linkedin.com/posts/two-years-ago-black-lemon-was-just-a-local-ugcPost-7455096406014312448-2ycu?utm_source=share&utm_medium=member_android&rcm=ACoAAExdJokBDyJ5lPptM8u4Qg0nMvvNIRgXDGk">
       <i className="bi bi-linkedin"></i>
     </a>
   </div>

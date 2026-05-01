@@ -1,187 +1,243 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { motion, useScroll } from "framer-motion";
 
-export default function LemonRicePremium() {
-    useEffect(() => {
-    window.scrollTo(0, 0); // ✅ scroll to top
+export default function LemonRecipeCombined() {
+
+  const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
-  return (
-    <div style={{ background: "#f6f8f3" }}>
 
-      {/* 🔥 HERO BANNER */}
-      <div className="banner-wrapper">
-        <img
+  return (
+    <div className="page">
+
+      {/* 🔥 SCROLL BAR */}
+      <motion.div className="progress-bar" style={{ scaleX: scrollYProgress }} />
+
+      {/* 🔥 LEMON JUICE */}
+      <div className="juice-wrapper">
+
+        <motion.img
+          src="/assets/images/lemon_juice.png"
+          className="juice-img"
+          initial={{ opacity: 0, x: -80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+        />
+
+        <motion.div
+          className="juice-card"
+          initial={{ opacity: 0, x: 80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+        >
+          <h2>🧃 Lemon Juice Preparation</h2>
+
+          <ul>
+            <li>✔ Mix 6g lemon powder with 1 liter water</li>
+            <li>✔ Add 130g sugar and stir well</li>
+            <li>✔ Enough for 5 people</li>
+            <li>✔ Prepare lemon soda, mint, tea etc.</li>
+            <li>✔ Serve chilled</li>
+          </ul>
+        </motion.div>
+      </div>
+
+      {/* 🔥 LEMON RICE (UPDATED WITH RIGHT IMAGE) */}
+      <div className="juice-wrapper reverse">
+
+        <motion.div
+          className="juice-card"
+          initial={{ opacity: 0, x: -80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+        >
+          <h2>🍚 Lemon Rice Preparation</h2>
+
+          <ul>
+            <li>✔ Mix lemon powder with water</li>
+            <li>✔ Prepare tempering with oil & spices</li>
+            <li>✔ Add lemon mixture</li>
+            <li>✔ Mix with cooked rice</li>
+            <li>✔ Serve hot</li>
+          </ul>
+        </motion.div>
+
+        <motion.img
           src="/assets/images/lemon_banner.png"
-          alt="banner"
-          className="banner-img"
+          className="juice-img"
+          initial={{ opacity: 0, x: 80 }}
+          whileInView={{ opacity: 1, x: 0 }}
         />
       </div>
 
-      {/* SPACE */}
-      <div style={{ height: "80px" }} />
+      {/* 🔥 ADDITIONAL USES */}
+      <div className="section">
 
-      {/* 🔥 STEPS */}
-      <div className="steps-container">
-        {steps.map((step, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, x: i % 2 === 0 ? -150 : 150 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className={`step-row ${i % 2 !== 0 ? "reverse" : ""}`}
-          >
-            {/* IMAGE */}
-            <motion.img
-              src={step.img}
-              alt=""
-              className="step-img"
-              initial={{ scale: 0.9 }}
-              whileInView={{ scale: 1 }}
-              transition={{ duration: 0.5 }}
-            />
+        <h2 className="title">✨ Additional Uses</h2>
 
-            {/* CONTENT */}
-            <div className="step-card">
-              <div className="step-number">{i + 1}</div>
-
-              <h2 className="step-title">{step.title}</h2>
-              <p className="step-desc">{step.desc}</p>
-            </div>
-          </motion.div>
-        ))}
+        <div className="grid">
+          {uses.map((item, i) => (
+            <motion.div
+              key={i}
+              className="use-card"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.15 }}
+            >
+              <img src={item.img} alt="" />
+              <div className="overlay">{item.title}</div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
-      {/* 🔥 RESPONSIVE CSS */}
+      {/* 🔥 CSS */}
       <style>{`
 
-/* ---------------- BANNER ---------------- */
-.banner-wrapper {
-  width: 100%;
-  background: #eef5e9;
-  border-radius: 0 0 60px 60px;
-  overflow: hidden;
+.page {
+  background: #f6f8f3;
+  font-family: 'Poppins', sans-serif;
 }
 
-.banner-img {
+/* SCROLL BAR */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
   width: 100%;
-  height: auto;
-  display: block;
+  background: linear-gradient(to right, #4caf50, #ffc107);
+  transform-origin: left;
+  z-index: 999;
 }
 
-/* ---------------- STEPS ---------------- */
-.steps-container {
+/* COMMON LAYOUT */
+.juice-wrapper {
   max-width: 1200px;
-  margin: auto;
-  padding: 0 20px 80px;
-}
-
-.step-row {
+  margin: 80px auto;
   display: flex;
+  gap: 40px;
   align-items: center;
-  gap: 50px;
-  margin-bottom: 100px;
+  padding: 20px;
 }
 
-.step-row.reverse {
+.reverse {
   flex-direction: row-reverse;
 }
 
-.step-img {
+/* IMAGE */
+.juice-img {
   width: 50%;
-  max-width: 520px;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  transition: 0.4s;
+}
+
+.juice-img:hover {
+  transform: scale(1.05);
+}
+
+/* CARD */
+.juice-card {
+  flex: 1;
+  background: #fff;
+  padding: 40px;
   border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.juice-card:hover {
+  transform: translateY(-10px);
+}
+
+.juice-card h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.juice-card ul {
+  line-height: 2;
+}
+
+/* 🔥 GRID FIXED 3 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* CARD */
+.use-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 200px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+/* IMAGE */
+.use-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+/* 🔥 HOVER EFFECT */
+.use-card:hover img {
+  transform: scale(1.1);
+}
+
+.use-card:hover {
+  transform: translateY(-10px);
   box-shadow: 0 20px 50px rgba(0,0,0,0.2);
 }
 
-.step-card {
-  flex: 1;
-  background: rgba(255,255,255,0.9);
-  padding: 40px;
-  border-radius: 60px 20px 60px 20px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-  position: relative;
+/* 🔥 GLOW */
+.use-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg,#81c784,#ffc107);
+  opacity: 0;
+  transition: 0.3s;
 }
 
-.step-number {
-  position: absolute;
-  top: -35px;
-  left: -35px;
-  background: #4caf50;
-  color: white;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
+.use-card:hover::after {
+  opacity: 0.25;
 }
 
 /* TEXT */
-.step-title {
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 15px;
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  text-align: center;
+  font-weight: 600;
 }
 
-.step-desc {
-  font-size: 1.2rem;
-  color: #444;
-  line-height: 1.7;
-}
-
-/* ---------------- TABLET ---------------- */
-@media (max-width: 1024px) {
-  .step-img {
-    width: 45%;
-  }
-
-  .step-title {
-    font-size: 1.7rem;
-  }
-
-  .step-desc {
-    font-size: 1.1rem;
+/* MOBILE */
+@media(max-width:900px){
+  .grid {
+    grid-template-columns: repeat(2,1fr);
   }
 }
 
-/* ---------------- MOBILE ---------------- */
-@media (max-width: 768px) {
-
-  .step-row {
-    flex-direction: column !important;
-    text-align: center;
-    gap: 25px !important;
+@media(max-width:768px){
+  .juice-wrapper {
+    flex-direction: column;
   }
 
-  .step-img {
-    width: 100% !important;
-    max-width: 100% !important;
+  .juice-img {
+    width: 100%;
   }
 
-  .step-card {
-    padding: 30px 20px 25px !important;
-    margin-top: 30px; /* ✅ SPACE FOR NUMBER */
-  }
-
-  /* ✅ FIX NUMBER POSITION */
-  .step-number {
-    left: 50% !important;
-    transform: translateX(-50%);
-    top: -35px;
-    z-index: 2;
-  }
-
-  .step-title {
-    font-size: 1.4rem !important;
-    margin-top: 15px; /* ✅ PUSH TEXT DOWN */
-  }
-
-  .step-desc {
-    font-size: 1rem !important;
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -190,26 +246,12 @@ export default function LemonRicePremium() {
   );
 }
 
-/* STEPS */
-const steps = [
-  {
-    title: "Add Lemon Powder",
-    desc: "Take 1 packet of lemon powder and add into a clean bowl.",
-    img: "/assets/images/put_lemon.png",
-  },
-  {
-    title: "Pour Water",
-    desc: "Add 20ml water into the bowl and mix to form lemon paste.",
-    img: "/assets/images/add_water.png",
-  },
-  {
-    title: "Prepare Tempering",
-    desc: "Heat oil, add mustard seeds & red chilli, then mix lemon paste.",
-    img: "/assets/images/add_oil.png",
-  },
-  {
-    title: "Mix with Rice",
-    desc: "Combine the prepared lemon mix with cooked rice and serve.",
-    img: "/assets/images/add_rice.png",
-  },
+/* DATA */
+const uses = [
+  { title: "Lemon Soda", img: "/assets/images/use1.png" },
+  { title: "Lemon Mint", img: "/assets/images/use2.png" },
+  { title: "Lemon Tea", img: "/assets/images/use3.png" },
+  { title: "Biryani", img: "/assets/images/use4.png" },
+  { title: "Chicken", img: "/assets/images/use5.png" },
+  { title: "Desserts", img: "/assets/images/use6.png" },
 ];

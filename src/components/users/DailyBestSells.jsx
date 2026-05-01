@@ -46,25 +46,37 @@ export default function DailyBestSells() {
     {
       img: `${base}/assets/images/category_essential_oil.png`,
       title: "Lemon Essential Oil",
-      description: ["Natural astringent", "Anti-bacterial", "Anti dandruff"],
+      description: ["Antibacterial", "Aromatherapeutic", "Stress-relieving", "Skin-purifying" , "Refreshing"],
       rating: 4.5,
     },
     {
       img: `${base}/assets/images/category_lemon_powder.png`,
       title: "Lemon Powder Drink",
-      description: ["Long shelf life", "Natural flavour", "Easy storage"],
+      description: ["Digestive", "Detoxifier", "Vitamin-C-rich", "Immunity-booster", "Skin-brightening"],
       rating: 4.5,
     },
     {
       img: "https://minio.vitalimes.com/vitalimes-images/uploads/Black_lemon_dry.png",
       title: "Black Lemon",
-      description: ["High antioxidant", "Natural smoky sourness"],
+      description: ["Digestive", "Detoxifier", "Antioxidant", "Metabolism-boosting", "Flavor-enhancing"],
       rating: 4.5,
     },
     {
       img: `${base}/assets/new/Lemon_seed_powder.png`,
       title: "Lemon Seed Powder",
-      description: ["Natural exfoliant", "Removes dead skin"],
+      description: ["Exfoliating", "Detoxifier", "Digestive" , "Skin-cleansing", "Antioxidant"],
+      rating: 4.5,
+    },
+    {
+      img: `${base}/assets/images/blacklemonpowder.jpeg`,
+      title: "Black Lemon Powder",
+      description: ["Antioxidant", "Digestive", "Detoxifier" , "Immunity-booster", "Flavor-enhancing"],
+      rating: 4.5,
+    },
+    {
+      img: `${base}/assets/images/category_lemon_seed_oil.png`,
+      title: "Lemon Seed Oil",
+      description: ["Hair-nourishing", "Scalp-cleansing", "Anti-inflammatory" , "Skin-repairing", "Antibacterial"],
       rating: 4.5,
     },
   ];

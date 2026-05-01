@@ -15,19 +15,19 @@ export default function Recipes() {
   const recipes = [
     {
       img: `/assets/images/recepies/lemon_rice.png`,
-      title: "Lemon Rice",
+      title: "Lemon powder Dishes",
       description: "A flavorful and tangy rice dish",
       path: "/recipes/lemon-rice",
     },
     {
-      img: `/assets/images/recepies/lemon_tea.jpeg`,
-      title: "Lemon Juice",
+      img: `/assets/images/recepies/nannari_receipe.png`,
+      title: "Nannari Juice Mixer",
       description: "A refreshing green juice with lemon",
-      path: "/recipes/green-juice", 
+      path: "/recipes/nannari-lemon", 
     },
     {
       img: `/assets/images/recepies/cake.png`,
-      title: "Healthy Dish",
+      title: "Black Lemon Powder Dishes",
       description: "A healthy, balanced dish",
       path: "/recipes/black-lemon",
     },

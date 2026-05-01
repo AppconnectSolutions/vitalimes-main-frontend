@@ -230,7 +230,131 @@ export default function LemonSeedOilUses() {
   }
 }
 
-      `}</style>
+/* 🔥 PREMIUM SECTION */
+.premium-section {
+  max-width: 1200px;
+  margin: 80px auto;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+/* CARD */
+.premium-card {
+  flex: 1;
+  min-width: 300px;
+  padding: 30px;
+  border-radius: 25px;
+
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(15px);
+
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  transition: 0.4s;
+  position: relative;
+}
+
+/* 🔥 GLOW EFFECT */
+.premium-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 25px;
+  background: linear-gradient(120deg, #81c784, #fbc02d);
+  opacity: 0;
+  filter: blur(20px);
+  transition: 0.4s;
+  z-index: -1;
+}
+
+.premium-card:hover::before {
+  opacity: 0.6;
+}
+
+.premium-card:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+/* HIGHLIGHT */
+.highlight {
+  background: linear-gradient(135deg, #fff3c4, #ffe082);
+}
+
+/* TEXT */
+.premium-card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.premium-card ul {
+  padding-left: 18px;
+  line-height: 1.8;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .premium-section {
+    flex-direction: column;
+  }
+}
+
+      `}
+      
+      
+      
+      
+      </style>
+      {/* 🔥 PREMIUM INFO SECTION */}
+<div className="premium-section">
+
+  {/* FOOD */}
+  <motion.div
+    className="premium-card"
+    initial={{ opacity: 0, x: -80 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6 }}
+  >
+    <h2>🍽️ How to Use in Food</h2>
+    <ul>
+      <li>✔ Add 1–2 drops in hot tea</li>
+      <li>✔ Add 1–2 drops in water</li>
+      <li>✔ Helps digestion & relieves cold and cough</li>
+    </ul>
+  </motion.div>
+
+  {/* PHARMA */}
+  <motion.div
+    className="premium-card highlight"
+    initial={{ opacity: 0, y: 80 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+  >
+    <h2>💊 Pharma (Steam Inhalation)</h2>
+    <ul>
+      <li>✔ Reduces sneezing & nasal congestion</li>
+      <li>✔ Helps with sinus & headaches</li>
+      <li>✔ Boosts energy with citrus aroma</li>
+    </ul>
+  </motion.div>
+
+  {/* COSMETICS */}
+  <motion.div
+    className="premium-card"
+    initial={{ opacity: 0, x: 80 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6 }}
+  >
+    <h2>💆 How to Use for Cosmetics</h2>
+    <ul>
+      <li>✔ Mix with coconut oil for skin care</li>
+      <li>✔ Apply on scalp to reduce dandruff</li>
+      <li>✔ Improves glow & hair health</li>
+    </ul>
+  </motion.div>
+
+</div>
     </div>
   );
 }
