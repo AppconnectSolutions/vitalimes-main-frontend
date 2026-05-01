@@ -275,8 +275,8 @@ export default function LemonRecipeCombined() {
 
 /* DATA */
 const uses = [
-  { title: "Lemon Soda", img: "/assets/images/use1.png" },
-  { title: "Lemon Mint", img: "/assets/images/use2.png" },
+  { title: "Lemon Soda", img: "/assets/images/lemon_soda.png" },
+  { title: "Lemon Mint", img: "/assets/images/lemon_mint.png" },
   { title: "Lemon Tea", img: "/assets/images/lemontea.jpeg" },
   { title: "Biryani", img: "/assets/images/biriyani.jpeg" },
   { title: "Chicken", img: "/assets/images/chicken.jpeg" },
