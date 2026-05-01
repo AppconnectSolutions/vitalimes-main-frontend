@@ -26,7 +26,7 @@ export default function Recipes() {
       path: "/recipes/nannari-lemon", 
     },
     {
-      img: `/assets/images/recepies/cake.png`,
+      img: `/assets/images/recepies/lemonpowder_receipes.png`,
       title: "Black Lemon Powder Dishes",
       description: "A healthy, balanced dish",
       path: "/recipes/black-lemon",
