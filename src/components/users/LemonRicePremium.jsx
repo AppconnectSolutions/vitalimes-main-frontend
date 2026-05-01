@@ -250,8 +250,8 @@ export default function LemonRecipeCombined() {
 const uses = [
   { title: "Lemon Soda", img: "/assets/images/use1.png" },
   { title: "Lemon Mint", img: "/assets/images/use2.png" },
-  { title: "Lemon Tea", img: "/assets/images/use3.png" },
-  { title: "Biryani", img: "/assets/images/use4.png" },
-  { title: "Chicken", img: "/assets/images/use5.png" },
-  { title: "Desserts", img: "/assets/images/use6.png" },
+  { title: "Lemon Tea", img: "/assets/images/lemontea.jpeg" },
+  { title: "Biryani", img: "/assets/images/biriyani.jpeg" },
+  { title: "Chicken", img: "/assets/images/chicken.jpeg" },
+  { title: "Desserts", img: "/assets/images/dessert.jpeg" },
 ];
