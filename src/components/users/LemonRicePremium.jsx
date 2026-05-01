@@ -159,21 +159,37 @@ export default function LemonRecipeCombined() {
   line-height: 2;
 }
 
-/* 🔥 GRID FIXED 3 */
+/* 🔥 SECTION SPACING (VERY IMPORTANT) */
+.section {
+  max-width: 1200px;
+  margin: 120px auto 140px; /* 🔥 space before footer */
+  padding: 20px;
+}
+
+/* TITLE */
+.title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 60px;
+}
+
+/* 🔥 GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+  gap: 35px;
 }
 
-/* CARD */
+/* 🔥 BIG PREMIUM CARD */
 .use-card {
   position: relative;
-  border-radius: 20px;
+  border-radius: 25px;
   overflow: hidden;
-  height: 200px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  transition: 0.3s;
+  height: 280px; /* 🔥 increased height */
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  transition: all 0.4s ease;
+  cursor: pointer;
 }
 
 /* IMAGE */
@@ -181,43 +197,54 @@ export default function LemonRecipeCombined() {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: 0.4s;
+  transition: 0.5s ease;
 }
 
-/* 🔥 HOVER EFFECT */
+/* 🔥 IMAGE ZOOM */
 .use-card:hover img {
-  transform: scale(1.1);
+  transform: scale(1.12);
 }
 
+/* 🔥 LIFT EFFECT */
 .use-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 70px rgba(0,0,0,0.25);
 }
 
-/* 🔥 GLOW */
-.use-card::after {
+/* 🔥 PREMIUM BORDER GLOW */
+.use-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg,#81c784,#ffc107);
+  border-radius: 25px;
+  padding: 2px;
+  background: linear-gradient(120deg,#4caf50,#ffc107);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
   opacity: 0;
   transition: 0.3s;
 }
 
-.use-card:hover::after {
-  opacity: 0.25;
+.use-card:hover::before {
+  opacity: 1;
 }
 
-/* TEXT */
+/* 🔥 DARK OVERLAY */
 .overlay {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 12px;
-  background: rgba(0,0,0,0.7);
+  padding: 18px;
+  background: linear-gradient(
+    transparent,
+    rgba(0,0,0,0.85)
+  );
   color: white;
   text-align: center;
   font-weight: 600;
+  font-size: 1.1rem;
 }
 
 /* MOBILE */
