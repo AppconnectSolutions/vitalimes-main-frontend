@@ -6,21 +6,21 @@ const futureProducts = [
     description:
       "Fresh lemon leaves planned for herbal, cooking, and wellness-based future products.",
     image:
-      "https://images.unsplash.com/photo-1599008633840-052c7f756385?auto=format&fit=crop&w=900&q=80",
+      "/assets/images/lemon_leaves.jpg",
   },
   {
     title: "Lemon Slice",
     description:
       "Premium lemon slices planned for food, beverage, garnish, and dried fruit usage.",
     image:
-      "https://images.unsplash.com/photo-1582284540020-8acbe03f4924?auto=format&fit=crop&w=900&q=80",
+      "/assets/images/lemon_slice.jpg",
   },
   {
     title: "Lemon Concentrate",
     description:
       "Natural lemon concentrate planned for juice, syrup, beverage, and food processing.",
     image:
-      "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=900&q=80",
+       "/assets/images/lemonade.jpg",
   },
 ];
 
