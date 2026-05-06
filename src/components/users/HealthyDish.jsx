@@ -333,9 +333,10 @@ export default function LemonSeedOilUses() {
   >
     <h2>💊 Pharma (Steam Inhalation)</h2>
     <ul>
-      <li>✔ Reduces sneezing & nasal congestion</li>
-      <li>✔ Helps with sinus & headaches</li>
-      <li>✔ Boosts energy with citrus aroma</li>
+      <li>✔ First boil water well and take it in a big pot</li>
+<li>✔ Add 1–2 drops of lemon oil into the water</li>
+<li>✔ Cover your head with a towel</li>
+<li>✔ Inhale the steam through your nose</li>
     </ul>
   </motion.div>
 

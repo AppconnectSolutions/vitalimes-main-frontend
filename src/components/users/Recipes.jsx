@@ -15,7 +15,7 @@ export default function Recipes() {
   const recipes = [
     {
       img: `/assets/images/recepies/lemon_rice.png`,
-      title: "Lemon powder Dishes",
+      title: "Lemon Powder",
       description: "A flavorful and tangy rice dish",
       path: "/recipes/lemon-rice",
     },
@@ -27,16 +27,22 @@ export default function Recipes() {
     },
     {
       img: `/assets/images/recepies/lemonpowder_receipes.png`,
-      title: "Black Lemon Powder Dishes",
+      title: "Black Lemon & Black Lemon Powder",
       description: "A healthy, balanced dish",
       path: "/recipes/black-lemon",
     },
     {
       img: `/assets/images/recepies/meat.png`,
-      title: "Lemon Essential Oil Dish",
+      title: "Lemon Essential Oil ",
       description: "A special dish made with organic oil",
       path: "/recipes/healthy-dish",
     },
+    {
+  img: `/assets/images/recepies/category_lemon_seed_oil.png`,
+  title: "Lemon Seed Oil",
+  description: "Natural oil for health, skincare & wellness",
+  path: "/recipes/lemon-seed-oil",
+},
   ];
 
   return (
@@ -49,13 +55,9 @@ export default function Recipes() {
         <Row className="justify-content-center g-4">
           {recipes.map((recipe, i) => (
             <Col
-              key={i}
-              xs={12}
-              sm={6}
-              md={4}
-              lg={3}
-              className="d-flex justify-content-center"
-            >
+  key={i}
+  className="d-flex justify-content-center recipe-col"
+>
              <Card
   onClick={(e) => {
     e.stopPropagation(); // ✅ THIS IS THE FIX
@@ -112,6 +114,23 @@ export default function Recipes() {
             height: 260px !important;
           }
         }
+          .recipe-col {
+  width: 20%;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .recipe-col {
+    width: 33.33%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .recipe-col {
+    width: 100%;
+  }
+}
       `}</style>
     </section>
   );

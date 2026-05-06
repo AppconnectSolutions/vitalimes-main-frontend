@@ -68,6 +68,8 @@ import LemonJuiceRecipe from "./components/users/LemonJuiceRecipe.jsx";
 import HealthyDish from "./components/users/HealthyDish";
 import BlackLemonUses from "./components/users/BlackLemonUses";
 import NannariSection from "./components/users/LemonJuiceRecipe";
+import LemonSeedOilSection from "./components/users/LemonSeedOilSection";
+import FutureProducts from "./components/users/FutureProducts.jsx";
 
 
 /* ---------------- USER LAYOUT ---------------- */
@@ -121,6 +123,9 @@ function HomePage() {
       <ProductGrid />
       <FeedbackForm />
       <Testimonials />
+      <div onClick={(e) => e.stopPropagation()}>
+  <FutureProducts />
+</div>
       
       
     </main>
@@ -145,6 +150,7 @@ function App() {
 <Route path="/recipes/black-lemon" element={<BlackLemonUses />} />
 <Route path="/recipes/healthy-dish" element={<HealthyDish />} />
 <Route path="/recipes/nannari-lemon" element={<NannariSection />} />
+<Route path="/recipes/lemon-seed-oil" element={<LemonSeedOilSection />} />
             {/* PRODUCT DETAILS */}
             <Route path="product/:id" element={<ProductDetails />} />
 

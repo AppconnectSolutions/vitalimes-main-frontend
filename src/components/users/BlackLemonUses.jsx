@@ -32,7 +32,7 @@ export default function BlackLemonUses() {
       {/* HERO */}
       <div className="hero">
         <motion.h1 initial={{ opacity: 0, y: -40 }} animate={{ opacity: 1, y: 0 }}>
-          🍋 Black Lemon Powder
+          🍋 Black Lemon & Black Lemon Powder
         </motion.h1>
         <p className="typing">{text}</p>
       </div>
