@@ -36,6 +36,12 @@ export default function Banner() {
       sub: "Daily Wellness with Black Lemon Powder",
       pos: { top: "22%", right: "6%", textAlign: "right", width: "40%" }
     },
+    {
+      img: "/assets/images/bg_6.jpeg",
+      title: "Freshness you can feel, Wellness you can trust",
+      sub: "Daily Wellness with Black Lemon Powder",
+      pos: { top: "22%", right: "6%", textAlign: "right", width: "40%" }
+    },
   ];
 
   return (
