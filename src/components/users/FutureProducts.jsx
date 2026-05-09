@@ -5,22 +5,19 @@ const futureProducts = [
     title: "Lemon Leaves",
     description:
       "Fresh lemon leaves planned for herbal, cooking, and wellness-based future products.",
-    image:
-      "/assets/images/lemon_leaves.jpg",
+    image: "/assets/images/lemon_leaves.jpg",
   },
   {
     title: "Lemon Slice",
     description:
       "Premium lemon slices planned for food, beverage, garnish, and dried fruit usage.",
-    image:
-      "/assets/images/lemon_slice.jpg",
+    image: "/assets/images/lemon_slice.jpg",
   },
   {
     title: "Lemon Concentrate",
     description:
       "Natural lemon concentrate planned for juice, syrup, beverage, and food processing.",
-    image:
-       "/assets/images/lemonade.jpg",
+    image: "/assets/images/lemonade.jpg",
   },
 ];
 
@@ -37,15 +34,15 @@ export default function FutureProducts() {
 
   return (
     <>
-      <section className="future-products-section">
-        <div className="future-products-bg-circle circle-one"></div>
-        <div className="future-products-bg-circle circle-two"></div>
-
+      <section
+        className="future-products-section"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="future-products-container">
           <div className="future-products-content">
             <div className="future-products-text">
               <span className="future-products-badge">
-               
+                Upcoming Product Range
               </span>
 
               <h2>
@@ -54,8 +51,24 @@ export default function FutureProducts() {
 
               <p>
                 We are planning to introduce more lemon-based natural products
-                including lemon leaves, lemon slices, and lemon concentrate.
+                including lemon leaves, lemon slices, and lemon concentrate for
+                food, beverage, wellness, and processing applications.
               </p>
+
+              <div className="future-products-points">
+                <div>
+                  <span>✓</span>
+                  Natural lemon-based expansion
+                </div>
+                <div>
+                  <span>✓</span>
+                  Food and beverage focused
+                </div>
+                <div>
+                  <span>✓</span>
+                  Planned as per client requirement
+                </div>
+              </div>
 
               <button
                 type="button"
@@ -72,8 +85,12 @@ export default function FutureProducts() {
 
             <div className="future-products-highlight">
               <div className="highlight-card">
-                <h3>Upcoming</h3>
-                <p>Natural lemon product range</p>
+                <span className="highlight-label">Coming Soon</span>
+                <h3>Natural Lemon Product Range</h3>
+                <p>
+                  Expanding Vitalimes with premium lemon leaves, lemon slices,
+                  and lemon concentrate based on upcoming business needs.
+                </p>
               </div>
             </div>
           </div>
@@ -91,14 +108,25 @@ export default function FutureProducts() {
               >
                 <div className="future-product-image-box">
                   <img src={product.image} alt={product.title} />
+
                   <div className="future-product-overlay">
                     <span>Coming Soon</span>
                   </div>
                 </div>
 
                 <div className="future-product-info">
+                  <span className="product-category">
+                    Future Product {String(index + 1).padStart(2, "0")}
+                  </span>
+
                   <h3>{product.title}</h3>
+
                   <p>{product.description}</p>
+
+                  <div className="future-card-footer">
+                    <span>Planned Product</span>
+                    <span>→</span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -114,15 +142,12 @@ export default function FutureProducts() {
         .future-products-section {
           position: relative;
           overflow: hidden;
-          padding: 80px 20px;
-          background:
-            radial-gradient(circle at top left, rgba(255, 229, 100, 0.35), transparent 32%),
-            linear-gradient(135deg, #fffdf1 0%, #f7ffe8 45%, #ffffff 100%);
+          padding: 90px 20px;
+          background: #ffffff;
+          font-family: 'Poppins', sans-serif;
         }
 
         .future-products-container {
-          position: relative;
-          z-index: 2;
           max-width: 1200px;
           margin: 0 auto;
         }
@@ -130,9 +155,9 @@ export default function FutureProducts() {
         .future-products-content {
           display: grid;
           grid-template-columns: 1.2fr 0.8fr;
-          gap: 30px;
+          gap: 34px;
           align-items: center;
-          margin-bottom: 45px;
+          margin-bottom: 52px;
         }
 
         .future-products-text {
@@ -140,73 +165,108 @@ export default function FutureProducts() {
         }
 
         .future-products-badge {
-          display: inline-block;
-          margin-bottom: 14px;
-          padding: 8px 16px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 16px;
+          padding: 9px 20px;
           border-radius: 999px;
-          background: #e9f8cf;
-          color: #5d8f18;
-          font-size: 14px;
-          font-weight: 800;
-          letter-spacing: 0.4px;
+          background: #f1f8e7;
+          border: 1px solid rgba(11, 125, 59, 0.15);
+          color: #0b7d3b;
+          font-size: 13px;
+          font-weight: 900;
+          letter-spacing: 1px;
           text-transform: uppercase;
-          box-shadow: 0 8px 20px rgba(93, 143, 24, 0.12);
+          box-shadow: 0 10px 28px rgba(7, 86, 41, 0.08);
         }
 
         .future-products-text h2 {
-          margin: 0 0 16px;
-          font-size: clamp(34px, 5vw, 56px);
+          margin: 0 0 18px;
+          font-size: clamp(36px, 5vw, 60px);
           line-height: 1.05;
-          font-weight: 900;
-          color: #17210f;
+          font-weight: 950;
+          letter-spacing: -1.2px;
+          color: #102f1e;
         }
 
         .future-products-text h2 span {
-          color: #79a91d;
+          color: #d8a708;
           position: relative;
+          display: inline-block;
         }
 
         .future-products-text h2 span::after {
           content: "";
           position: absolute;
           left: 0;
-          bottom: 4px;
-          width: 100%;
-          height: 10px;
-          background: rgba(255, 215, 64, 0.45);
+          right: 0;
+          bottom: 6px;
+          height: 12px;
+          background: rgba(255, 210, 48, 0.35);
+          border-radius: 999px;
           z-index: -1;
-          border-radius: 20px;
         }
 
         .future-products-text p {
-          max-width: 650px;
-          margin: 0 0 26px;
-          color: #59624f;
-          font-size: 17px;
-          line-height: 1.7;
+          max-width: 680px;
+          margin: 0 0 24px;
+          color: #5e674f;
+          font-size: 16.5px;
+          line-height: 1.75;
+          font-weight: 500;
+        }
+
+        .future-products-points {
+          display: grid;
+          gap: 12px;
+          margin-bottom: 28px;
+        }
+
+        .future-products-points div {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #425137;
+          font-size: 15px;
+          font-weight: 700;
+        }
+
+        .future-products-points span {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #0b7d3b, #063f20);
+          color: #ffffff;
+          font-size: 13px;
+          font-weight: 900;
+          flex-shrink: 0;
         }
 
         .future-products-scroll-btn {
           border: none;
           outline: none;
           cursor: pointer;
-          padding: 14px 22px;
+          padding: 15px 24px;
           border-radius: 999px;
-          background: linear-gradient(135deg, #86b817, #567c0f);
+          background: linear-gradient(135deg, #0b7d3b, #063f20);
           color: #ffffff;
           font-size: 15px;
-          font-weight: 800;
+          font-weight: 900;
           display: inline-flex;
           align-items: center;
-          gap: 10px;
-          box-shadow: 0 14px 30px rgba(86, 124, 15, 0.28);
+          gap: 11px;
+          box-shadow: 0 18px 42px rgba(6, 63, 32, 0.24);
           transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .future-products-scroll-btn span {
           display: inline-flex;
-          width: 24px;
-          height: 24px;
+          width: 26px;
+          height: 26px;
           align-items: center;
           justify-content: center;
           border-radius: 50%;
@@ -216,7 +276,7 @@ export default function FutureProducts() {
 
         .future-products-scroll-btn:hover {
           transform: translateY(-4px);
-          box-shadow: 0 18px 38px rgba(86, 124, 15, 0.35);
+          box-shadow: 0 24px 55px rgba(6, 63, 32, 0.32);
         }
 
         .future-products-highlight {
@@ -226,75 +286,125 @@ export default function FutureProducts() {
         }
 
         .highlight-card {
-          width: min(100%, 330px);
-          min-height: 210px;
-          border-radius: 32px;
-          padding: 30px;
-          background:
-            linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.45)),
-            url("https://images.unsplash.com/photo-1590502593747-42a996133562?auto=format&fit=crop&w=800&q=80");
-          background-size: cover;
-          background-position: center;
-          box-shadow: 0 25px 60px rgba(69, 92, 21, 0.18);
-          border: 1px solid rgba(255, 255, 255, 0.65);
+          width: min(100%, 360px);
+          min-height: 245px;
+          border-radius: 34px;
+          padding: 34px;
+          background: linear-gradient(135deg, #ffffff 0%, #fbfff3 100%);
+          border: 1px solid #e8efdf;
+          box-shadow: 0 24px 65px rgba(54, 72, 18, 0.10);
           position: relative;
           overflow: hidden;
+          transition: all 0.35s ease;
         }
 
         .highlight-card::before {
           content: "";
           position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, rgba(255,255,255,0.82), rgba(255,255,255,0.28));
+          top: 0;
+          left: -120%;
+          width: 70%;
+          height: 100%;
+          background: linear-gradient(
+            110deg,
+            transparent,
+            rgba(255, 255, 255, 0.78),
+            transparent
+          );
+          transform: skewX(-20deg);
+          transition: 0.85s;
+          pointer-events: none;
         }
 
-        .highlight-card h3,
-        .highlight-card p {
-          position: relative;
-          z-index: 1;
+        .highlight-card:hover::before {
+          left: 130%;
+        }
+
+        .highlight-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 34px 85px rgba(54, 72, 18, 0.16);
+        }
+
+        .highlight-label {
+          display: inline-flex;
+          padding: 7px 16px;
+          margin-bottom: 18px;
+          border-radius: 999px;
+          background: #f1f8e7;
+          color: #0b7d3b;
+          font-size: 11px;
+          font-weight: 900;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          border: 1px solid rgba(11, 125, 59, 0.12);
         }
 
         .highlight-card h3 {
-          margin: 0 0 8px;
-          font-size: 34px;
-          font-weight: 900;
-          color: #234000;
+          margin: 0 0 12px;
+          font-size: 30px;
+          line-height: 1.15;
+          font-weight: 950;
+          color: #102f1e;
         }
 
         .highlight-card p {
           margin: 0;
-          font-size: 16px;
-          font-weight: 700;
-          color: #4f642f;
+          color: #5e674f;
+          font-size: 15.5px;
+          line-height: 1.7;
+          font-weight: 500;
         }
 
         .future-products-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 26px;
+          gap: 28px;
         }
 
         .future-product-card {
-          background: rgba(255, 255, 255, 0.86);
-          backdrop-filter: blur(10px);
-          border-radius: 28px;
+          background: #ffffff;
+          border-radius: 30px;
           overflow: hidden;
-          border: 1px solid rgba(255, 255, 255, 0.75);
-          box-shadow: 0 18px 45px rgba(56, 72, 25, 0.12);
-          transform: translateY(30px);
+          border: 1px solid #e8efdf;
+          box-shadow: 0 22px 55px rgba(54, 72, 18, 0.10);
+          transform: translateY(35px);
           opacity: 0;
           animation: futureCardUp 0.9s ease forwards;
           transition: transform 0.35s ease, box-shadow 0.35s ease;
+          position: relative;
+        }
+
+        .future-product-card::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -120%;
+          width: 70%;
+          height: 100%;
+          background: linear-gradient(
+            110deg,
+            transparent,
+            rgba(255, 255, 255, 0.72),
+            transparent
+          );
+          transform: skewX(-20deg);
+          transition: 0.85s;
+          pointer-events: none;
+          z-index: 4;
+        }
+
+        .future-product-card:hover::before {
+          left: 130%;
         }
 
         .future-product-card:hover {
           transform: translateY(-10px) scale(1.02);
-          box-shadow: 0 28px 70px rgba(56, 72, 25, 0.2);
+          box-shadow: 0 32px 78px rgba(54, 72, 18, 0.18);
         }
 
         .future-product-image-box {
           position: relative;
-          height: 260px;
+          height: 265px;
           overflow: hidden;
         }
 
@@ -303,7 +413,7 @@ export default function FutureProducts() {
           height: 100%;
           object-fit: cover;
           display: block;
-          transition: transform 0.6s ease;
+          transition: transform 0.65s ease;
         }
 
         .future-product-card:hover img {
@@ -319,62 +429,76 @@ export default function FutureProducts() {
           padding: 18px;
           background: linear-gradient(
             180deg,
-            rgba(0, 0, 0, 0.18),
-            rgba(0, 0, 0, 0.02)
+            rgba(0, 0, 0, 0.16),
+            rgba(0, 0, 0, 0.03)
           );
+          z-index: 2;
         }
 
         .future-product-overlay span {
           padding: 8px 13px;
           border-radius: 999px;
-          background: rgba(255, 255, 255, 0.92);
-          color: #5d8f18;
-          font-size: 13px;
+          background: rgba(255, 255, 255, 0.94);
+          color: #0b7d3b;
+          font-size: 12px;
           font-weight: 900;
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
         }
 
         .future-product-info {
-          padding: 24px;
+          padding: 26px;
+        }
+
+        .product-category {
+          display: inline-block;
+          margin-bottom: 12px;
+          padding: 6px 13px;
+          border-radius: 999px;
+          background: #eef8d8;
+          color: #0b7d3b;
+          font-size: 11px;
+          font-weight: 900;
+          text-transform: uppercase;
+          letter-spacing: 0.7px;
         }
 
         .future-product-info h3 {
           margin: 0 0 10px;
-          font-size: 23px;
-          font-weight: 900;
-          color: #1e2d12;
+          font-size: 24px;
+          line-height: 1.25;
+          font-weight: 950;
+          color: #102f1e;
         }
 
         .future-product-info p {
-          margin: 0;
-          color: #626b58;
+          margin: 0 0 20px;
+          color: #5e674f;
           font-size: 15px;
           line-height: 1.65;
+          font-weight: 500;
         }
 
-        .future-products-bg-circle {
-          position: absolute;
+        .future-card-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          padding-top: 16px;
+          border-top: 1px solid #e8efdf;
+          color: #0b7d3b;
+          font-size: 13px;
+          font-weight: 900;
+        }
+
+        .future-card-footer span:last-child {
+          width: 28px;
+          height: 28px;
           border-radius: 50%;
-          filter: blur(4px);
-          opacity: 0.35;
-          animation: futureFloat 5s ease-in-out infinite;
-        }
-
-        .circle-one {
-          width: 220px;
-          height: 220px;
-          background: #f7d94c;
-          top: -60px;
-          right: 10%;
-        }
-
-        .circle-two {
-          width: 150px;
-          height: 150px;
-          background: #9acb37;
-          bottom: 40px;
-          left: 4%;
-          animation-delay: 1s;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: #f1f8e7;
+          color: #0b7d3b;
         }
 
         @keyframes futureFadeLeft {
@@ -415,16 +539,7 @@ export default function FutureProducts() {
           }
         }
 
-        @keyframes futureFloat {
-          0%, 100% {
-            transform: translateY(0) scale(1);
-          }
-          50% {
-            transform: translateY(20px) scale(1.05);
-          }
-        }
-
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
           .future-products-content {
             grid-template-columns: 1fr;
           }
@@ -434,30 +549,57 @@ export default function FutureProducts() {
           }
 
           .future-products-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .future-products-section {
+            padding: 70px 16px;
+          }
+
+          .future-products-grid {
             grid-template-columns: 1fr;
           }
 
-          .future-products-section {
-            padding: 60px 16px;
+          .future-product-image-box {
+            height: 245px;
           }
 
-          .future-product-image-box {
-            height: 230px;
+          .future-products-text h2 {
+            font-size: 38px;
+          }
+
+          .highlight-card {
+            width: 100%;
           }
         }
 
         @media (max-width: 480px) {
+          .future-products-section {
+            padding: 60px 14px;
+          }
+
           .future-products-scroll-btn {
             width: 100%;
             justify-content: center;
           }
 
           .highlight-card {
-            min-height: 180px;
+            min-height: auto;
+            padding: 28px 22px;
+          }
+
+          .highlight-card h3 {
+            font-size: 26px;
           }
 
           .future-product-info {
-            padding: 20px;
+            padding: 22px;
+          }
+
+          .future-product-info h3 {
+            font-size: 22px;
           }
         }
       `}</style>
