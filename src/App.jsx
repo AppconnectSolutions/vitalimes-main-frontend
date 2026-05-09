@@ -70,6 +70,7 @@ import BlackLemonUses from "./components/users/BlackLemonUses";
 import NannariSection from "./components/users/LemonJuiceRecipe";
 import LemonSeedOilSection from "./components/users/LemonSeedOilSection";
 import FutureProducts from "./components/users/FutureProducts.jsx";
+import LemonOilAdditives from "./components/users/LemonOilAdditives";
 
 
 /* ---------------- USER LAYOUT ---------------- */
@@ -125,6 +126,7 @@ function HomePage() {
       <Testimonials />
       <div onClick={(e) => e.stopPropagation()}>
   <FutureProducts />
+  <LemonOilAdditives />
 </div>
       
       
