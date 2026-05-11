@@ -71,6 +71,7 @@ import NannariSection from "./components/users/LemonJuiceRecipe";
 import LemonSeedOilSection from "./components/users/LemonSeedOilSection";
 import FutureProducts from "./components/users/FutureProducts.jsx";
 import LemonOilAdditives from "./components/users/LemonOilAdditives";
+import LemonJuicePowderRecipes from "./components/users/LemonJuicePowderRecipes.jsx";
 
 
 /* ---------------- USER LAYOUT ---------------- */
@@ -153,6 +154,10 @@ function App() {
 <Route path="/recipes/healthy-dish" element={<HealthyDish />} />
 <Route path="/recipes/nannari-lemon" element={<NannariSection />} />
 <Route path="/recipes/lemon-seed-oil" element={<LemonSeedOilSection />} />
+<Route
+  path="/recipes/lemon-juice-powder"
+  element={<LemonJuicePowderRecipes />}
+/>
             {/* PRODUCT DETAILS */}
             <Route path="product/:id" element={<ProductDetails />} />
 

@@ -65,7 +65,7 @@ export default function DailyBestSells() {
         "Daily kitchen use",
         "Summer special",
       ],
-      rating: 4.5,
+      
     },
     {
       img: "https://minio.vitalimes.com/vitalimes-images/uploads/Black_lemon_dry.png",
@@ -117,27 +117,7 @@ export default function DailyBestSells() {
     },
   ];
 
-  const renderStars = (rating) => {
-    const full = Math.floor(rating);
-    const half = rating - full >= 0.5;
-    const stars = [];
 
-    for (let i = 0; i < full; i++)
-      stars.push(<i key={i} className="bi bi-star-fill text-warning"></i>);
-
-    if (half)
-      stars.push(<i key="half" className="bi bi-star-half text-warning"></i>);
-
-    while (stars.length < 5)
-      stars.push(
-        <i
-          key={"e" + stars.length}
-          className="bi bi-star text-warning opacity-50"
-        ></i>
-      );
-
-    return stars;
-  };
 
   return (
     <section
@@ -228,10 +208,7 @@ export default function DailyBestSells() {
                   ))}
                 </ul>
 
-                <div className="rating">
-                  <div>{renderStars(p.rating)}</div>
-                  <span>{p.rating}</span>
-                </div>
+            
 
                 <a
                   href="/products"

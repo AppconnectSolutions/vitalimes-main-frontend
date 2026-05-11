@@ -53,6 +53,17 @@ export default function Recipes() {
       tag: "Natural Wellness",
       badge: "New",
     },
+
+    // ✅ NEW CARD ADDED HERE
+    {
+      img: `/assets/images/recepies/instant.png`,
+      title: "Instant Drink Lemon Juice Powder",
+      description:
+        "Prepare lemon soda, lemon tea and lemon sarbath with one refreshing instant drink mix.",
+      path: "/recipes/lemon-juice-powder",
+      tag: "Instant Drink Mix",
+      badge: "New Recipe",
+    },
   ];
 
   return (
@@ -203,24 +214,24 @@ export default function Recipes() {
           align-items: stretch;
         }
 
-        .recipe-col {
-          flex: 0 0 20%;
-          max-width: 20%;
-        }
-
-        .recipe-card {
-          width: 100%;
-          min-height: 100%;
-          border: 1px solid #e8efdf !important;
-          border-radius: 30px !important;
-          overflow: hidden;
-          background: #ffffff !important;
-          box-shadow: 0 22px 55px rgba(54, 72, 18, 0.10);
-          transition: transform 0.4s ease, box-shadow 0.4s ease;
-          opacity: 0;
-          transform: translateY(45px);
-          animation: recipeCardUp 0.85s ease forwards;
-        }
+   .recipe-col {
+  flex: 0 0 33.333%;
+  max-width: 33.333%;
+}
+    .recipe-card {
+  width: 100%;
+  max-width: 430px;
+  min-height: 560px;
+  border: 1px solid #e8efdf !important;
+  border-radius: 34px !important;
+  overflow: hidden;
+  background: #ffffff !important;
+  box-shadow: 0 26px 65px rgba(54, 72, 18, 0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  opacity: 0;
+  transform: translateY(45px);
+  animation: recipeCardUp 0.85s ease forwards;
+}
 
         .recipe-card::before {
           content: "";
@@ -251,10 +262,11 @@ export default function Recipes() {
         }
 
         .recipe-img-box {
-          position: relative;
-          height: 310px;
-          overflow: hidden;
-        }
+  position: relative;
+  height: 360px;
+  overflow: hidden;
+  background: #fbfff3;
+}
 
         .recipe-img-box img {
           width: 100%;
@@ -326,9 +338,9 @@ export default function Recipes() {
           opacity: 1;
         }
 
-        .recipe-body {
-          padding: 22px !important;
-        }
+       .recipe-body {
+  padding: 26px !important;
+}
 
         .recipe-tag {
           display: inline-block;
@@ -374,6 +386,13 @@ export default function Recipes() {
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+
+        @media (max-width: 1400px) {
+          .recipe-col {
+            flex: 0 0 25%;
+            max-width: 25%;
           }
         }
 
@@ -481,15 +500,22 @@ export default function Recipes() {
             margin-bottom: 10px;
           }
 
-          .recipe-title {
-            font-size: 1.15rem !important;
-            line-height: 1.25;
-          }
+         .recipe-title {
+  margin-bottom: 12px !important;
+  color: #102f1e;
+  font-size: 1.35rem !important;
+  line-height: 1.35;
+  font-weight: 950 !important;
+}
 
-          .recipe-description {
-            font-size: 0.92rem !important;
-            line-height: 1.55;
-          }
+
+         .recipe-description {
+  margin: 0 !important;
+  color: #5e674f !important;
+  font-size: 1rem !important;
+  line-height: 1.7;
+  font-weight: 500;
+}
         }
 
         @media (max-width: 360px) {
