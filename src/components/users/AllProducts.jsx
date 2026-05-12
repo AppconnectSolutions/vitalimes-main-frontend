@@ -156,10 +156,7 @@ export default function AllProducts() {
                       </div>
                     )}
 
-                    <div className="mt-2 d-flex align-items-center">
-                      <span style={{ color: "#ffcc00" }}>★★★★☆</span>
-                      <span className="ms-2">4.4</span>
-                    </div>
+                    
 
                     <button className="add-btn w-100 mt-3">ADD TO CART</button>
                   </div>
