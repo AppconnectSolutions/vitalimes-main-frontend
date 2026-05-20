@@ -41,7 +41,7 @@ import ProductGrid from "./components/users/ProductGrid.jsx";
 import Footer from "./components/users/Footer.jsx";
 import { CartProvider } from "./components/users/CartContext";
 import WhyChoose from "./components/users/WhyChoose.jsx";
-import Testimonials from "./components/users/Testimonials.jsx";
+
 
 import Checkout from "./components/users/Checkout.jsx";
 import ForgotPassword from "./components/users/ForgotPassword.jsx";
@@ -124,7 +124,7 @@ function HomePage() {
       <DailyBestSells />
       <ProductGrid />
       <FeedbackForm />
-      <Testimonials />
+      
       <div onClick={(e) => e.stopPropagation()}>
   <FutureProducts />
   <LemonOilAdditives />

@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCart } from "./CartContext.jsx";
 import { Container, Row, Col } from "react-bootstrap";
+import RelatedProducts from "./RelatedProducts.jsx";
+import ProductReviews from "./ProductReviews.jsx";
 
 export default function ProductDetails() {
   const { cart, addToCart, openCart } = useCart();
@@ -45,13 +47,20 @@ export default function ProductDetails() {
   const [activeImg, setActiveImg] = useState(0);
   const [qty, setQty] = useState(1);
   const [related, setRelated] = useState([]);
+  const [reviewSummary, setReviewSummary] = useState({
+  average_rating: 0,
+  total_reviews: 0,
+});
 
-  useEffect(() => {
-    loadProduct();
-    loadRelated();
-    setActiveImg(0);
-    setQty(1);
-  }, [id]);
+const reviewSectionRef = useRef(null);
+
+useEffect(() => {
+  loadProduct();
+  loadRelated();
+  loadReviewSummary();
+  setActiveImg(0);
+  setQty(1);
+}, [id]);
 
   /* ================= LOAD PRODUCT ================= */
   const loadProduct = async () => {
@@ -91,6 +100,27 @@ export default function ProductDetails() {
       setRelated([]);
     }
   };
+
+  /* ================= LOAD REVIEW SUMMARY ================= */
+const loadReviewSummary = async () => {
+  try {
+    const { data } = await axios.get(
+      `${API_URL}/api/reviews/summary/${id}`
+    );
+
+    setReviewSummary({
+      average_rating: Number(data.summary?.average_rating || 0),
+      total_reviews: Number(data.summary?.total_reviews || 0),
+    });
+  } catch (error) {
+    console.error("Review summary fetch failed:", error);
+
+    setReviewSummary({
+      average_rating: 0,
+      total_reviews: 0,
+    });
+  }
+};
 
   if (!product) return <h3 className="text-center my-5">Loading Product...</h3>;
 
@@ -135,6 +165,38 @@ export default function ProductDetails() {
     e.currentTarget.src =
       "https://via.placeholder.com/600x400?text=No+Image";
   };
+
+
+  /* ================= DYNAMIC PRODUCT RATING STARS ================= */
+const renderProductRatingStars = (rating) => {
+  const roundedRating = Math.round(Number(rating || 0));
+
+  return (
+    <span style={{ display: "inline-flex", gap: "2px" }}>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <span
+          key={star}
+          style={{
+            color: star <= roundedRating ? "#ffc107" : "#d4d4d4",
+            fontSize: "22px",
+            lineHeight: "1",
+          }}
+        >
+          ★
+        </span>
+      ))}
+    </span>
+  );
+};
+
+
+/* ================= SCROLL TO CUSTOMER REVIEW SECTION ================= */
+const scrollToReviews = () => {
+  reviewSectionRef.current?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+};
 
   const productIdMain = product.id || product._id || product.product_id;
   const productInCart = cart.some(
@@ -191,7 +253,36 @@ export default function ProductDetails() {
         {/* RIGHT: Product details */}
         <Col md={6}>
           <h2 className="fw-bold">{product.title}</h2>
+            {/* DYNAMIC PRODUCT RATING */}
+<div
+  onClick={scrollToReviews}
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    marginTop: "10px",
+    marginBottom: "12px",
+    cursor: "pointer",
+    width: "fit-content",
+  }}
+  title="View customer reviews"
+>
+  {renderProductRatingStars(reviewSummary.average_rating)}
 
+  <span
+    style={{
+      fontSize: "16px",
+      fontWeight: "600",
+      color: "#333",
+    }}
+  >
+    {reviewSummary.total_reviews > 0
+      ? `${reviewSummary.average_rating.toFixed(2)} (${reviewSummary.total_reviews} review${
+          reviewSummary.total_reviews !== 1 ? "s" : ""
+        })`
+      : "No reviews yet"}
+  </span>
+</div>
           {selectedVariant ? (
             <div className="my-3">
               <h3 className="fw-bold">
@@ -335,119 +426,22 @@ export default function ProductDetails() {
       {/* =======================================================
           RELATED PRODUCTS SECTION
       ======================================================= */}
-      <div className="mt-5">
-        <h3 className="fw-bold mb-4">Related Products</h3>
+      <RelatedProducts
+  related={related}
+  currentProductId={productIdMain}
+  toImageUrl={toImageUrl}
+  handleImgError={handleImgError}
+/>
 
-        <Row>
-          {related.length === 0 && <p className="text-muted">No related products found.</p>}
-
-          {related
-            .filter((p) => p.id !== id && p._id !== id)
-            .slice(0, 8)
-            .map((p) => {
-              const firstImg = toImageUrl(p.image1) || "https://via.placeholder.com/150";
-
-              const productId = p.id || p._id || p.product_id;
-              const variant = p.variants?.[0];
-              const variantWeight = variant?.weight || "1unit";
-
-              const itemInCart = cart.find(
-                (i) => i.id === productId && i.weight === variantWeight
-              );
-              const qtyRelated = itemInCart?.qty || 1;
-
-              const updateRelatedQty = (newQty) => {
-                if (itemInCart) {
-                  addToCart({ ...itemInCart }, newQty - itemInCart.qty, { openCart: false });
-                }
-              };
-
-              return (
-                <Col md={3} sm={6} xs={6} className="mb-4" key={productId}>
-                  <div
-  className="p-3 border rounded d-flex flex-column h-100"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => navigate(`/product/${productId}`)}
-                  >
-                    <img
-                      src={firstImg}
-                      alt={p.title}
-                      className="w-100"
-                      style={{
-                        height: "220px",
-                        objectFit: "cover",
-                        borderRadius: "8px",
-                      }}
-                      onError={handleImgError}
-                    />
-
-                    <h6 className="mt-3 fw-bold" style={{ minHeight: "48px" }}>
-  {p.title}
-</h6>
-
-                    {p.variants?.length > 0 ? (
-                      <p className="m-0 fw-bold">
-                        ₹{variant?.sale_price || variant?.price || p.price}
-                      </p>
-                    ) : (
-                      <p className="m-0 fw-bold">₹{p.price}</p>
-                    )}
-
-                    {/* Quantity buttons */}
-                    <div className="d-flex align-items-center justify-content-center mt-2">
-                      <button
-                        className="btn btn-dark"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          if (qtyRelated > 1) updateRelatedQty(qtyRelated - 1);
-                        }}
-                      >
-                        -
-                      </button>
-                      <span className="mx-2">{qtyRelated}</span>
-                      <button
-                        className="btn btn-dark"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          updateRelatedQty(qtyRelated + 1);
-                        }}
-                      >
-                        +
-                      </button>
-                    </div>
-
-                    {/* Add to Cart button */}
-                    <div className="mt-auto">
-  <button
-    className="btn btn-dark w-100 mt-2"
-                      onClick={(e) => {
-                        e.stopPropagation();
-
-                        if (!itemInCart) {
-                          addToCart(
-                            {
-                              id: productId,
-                              title: p.title,
-                              weight: variantWeight,
-                              price: variant?.sale_price || variant?.price || p.price,
-                              img: firstImg,
-                            },
-                            1
-                          );
-                        }
-
-                        openCart();
-                      }}
-                    >
-                      Add to Cart
-                    </button>
-                    </div>
-                  </div>
-                </Col>
-              );
-            })}
-        </Row>
-      </div>
+<div ref={reviewSectionRef}>
+  <ProductReviews
+    productId={productIdMain}
+    API_URL={API_URL}
+    productTitle={product.title}
+    productImage={product.images?.[0] || ""}
+    onReviewSubmitted={loadReviewSummary}
+  />
+</div>
     </Container>
   );
 }
