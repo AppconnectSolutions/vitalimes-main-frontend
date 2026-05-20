@@ -6,6 +6,7 @@ import ProductCard from "./ProductCard";
 export default function ProductGrid() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [reviewSummaries, setReviewSummaries] = useState({});
 
   const API_URL =
     import.meta.env.VITE_API_URL || "http://localhost:5000";
@@ -56,9 +57,22 @@ export default function ProductGrid() {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(`${API_URL}/api/products?status=Active`);
-        if (res.data.success && Array.isArray(res.data.products)) {
-          setProducts(res.data.products.slice(0, 6));
-        }
+
+if (res.data.success && Array.isArray(res.data.products)) {
+  const productList = res.data.products.slice(0, 6);
+  setProducts(productList);
+
+  const productIds = productList.map((product) => product.id);
+
+  const ratingRes = await axios.post(
+    `${API_URL}/api/reviews/summary/bulk`,
+    {
+      product_ids: productIds,
+    }
+  );
+
+  setReviewSummaries(ratingRes.data.summaries || {});
+}
       } catch (err) {
         console.error("Product fetch error:", err);
       } finally {
@@ -93,6 +107,11 @@ export default function ProductGrid() {
         {products.map((product) => {
           const firstVariant = product.variants?.[0];
 
+          const ratingSummary = reviewSummaries[product.id] || {
+  average_rating: 0,
+  total_reviews: 0,
+};
+
           return (
             <Col
               key={product.id}
@@ -103,17 +122,18 @@ export default function ProductGrid() {
               className="d-flex justify-content-center"
             >
               <ProductCard
-                product={{
-                  id: product.id,
-                  name: product.title,
-                  price: firstVariant?.price || 0,
-                  sale_price: firstVariant?.sale_price ?? null,
-                  rating: 5,
-                  image_url: toImageUrl(product.image1),
-                  image_url2: toImageUrl(product.image2 || product.image1),
-                  image_url3: toImageUrl(product.image3 || product.image1),
-                }}
-              />
+  product={{
+    id: product.id,
+    name: product.title,
+    price: firstVariant?.price || 0,
+    sale_price: firstVariant?.sale_price ?? null,
+    average_rating: ratingSummary.average_rating,
+    total_reviews: ratingSummary.total_reviews,
+    image_url: toImageUrl(product.image1),
+    image_url2: toImageUrl(product.image2 || product.image1),
+    image_url3: toImageUrl(product.image3 || product.image1),
+  }}
+/>
             </Col>
           );
         })}

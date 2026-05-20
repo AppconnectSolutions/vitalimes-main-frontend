@@ -53,7 +53,6 @@ import PaymentMethod from "./components/users/account/PaymentMethod.jsx";
 import NotificationSettings from "./components/users/account/NotificationSettings.jsx";
 import Address from "./components/users/account/Address.jsx";
 import CartPage from "./components/users/account/CartPage.jsx";
-import FeedbackForm from "./components/users/FeedbackForm.jsx";
 import ProductDetails from "./components/users/ProductDetails.jsx";
 import About from "./components/users/About.jsx";
 import Contact from "./components/users/Contact.jsx";
@@ -123,7 +122,7 @@ function HomePage() {
       <Recipes />
       <DailyBestSells />
       <ProductGrid />
-      <FeedbackForm />
+      
       
       <div onClick={(e) => e.stopPropagation()}>
   <FutureProducts />

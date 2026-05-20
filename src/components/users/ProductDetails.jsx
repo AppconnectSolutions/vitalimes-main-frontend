@@ -426,11 +426,12 @@ const scrollToReviews = () => {
       {/* =======================================================
           RELATED PRODUCTS SECTION
       ======================================================= */}
-      <RelatedProducts
+     <RelatedProducts
   related={related}
   currentProductId={productIdMain}
   toImageUrl={toImageUrl}
   handleImgError={handleImgError}
+  API_URL={API_URL}
 />
 
 <div ref={reviewSectionRef}>

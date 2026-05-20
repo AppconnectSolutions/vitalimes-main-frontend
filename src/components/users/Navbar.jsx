@@ -69,12 +69,44 @@ useEffect(() => {
     <>
       <header className="sticky-top">
         {/* TOP STRIP */}
-         <div className="top-offer-strip bg-dark text-white py-2">
-  <div className="container d-flex flex-column flex-md-row align-items-center justify-content-between">
-    
-    {/* CENTER TIMER */}
-    <div className="offer-timer text-center text-md-start mb-2 mb-md-0 flex-grow-1">
-      <h6 className="mb-0">Pure Lemon. Pure Wellness.</h6>
+         
+        {/* SINGLE COMPACT TOP BAR */}
+<div className="compact-topbar">
+  <div className="container-fluid compact-topbar-inner">
+    {/* LEFT ARROW */}
+    <button
+      className="topbar-arrow-btn topbar-left-arrow"
+      onClick={() =>
+        setCarouselIndex((prev) =>
+          prev === 0 ? carouselItems.length - 1 : prev - 1
+        )
+      }
+      type="button"
+      aria-label="Previous offer"
+    >
+      <ChevronLeft size={16} />
+    </button>
+
+    {/* PERFECTLY CENTERED SLIDING TEXT */}
+    <div className="topbar-carousel-area">
+      {carouselItems.map((item, i) => {
+        const isActive = i === carouselIndex;
+
+        return (
+          <div
+            key={i}
+            className="topbar-carousel-text"
+            style={{
+              opacity: isActive ? 1 : 0,
+              transform: isActive
+                ? "translate(-50%, -50%)"
+                : "translate(120%, -50%)",
+            }}
+          >
+            {item}
+          </div>
+        );
+      })}
     </div>
 
     {/* RIGHT WHATSAPP */}
@@ -82,117 +114,177 @@ useEffect(() => {
       href="https://wa.me/918072812904"
       target="_blank"
       rel="noopener noreferrer"
-      className="offer-whatsapp d-flex align-items-center gap-2"
-      style={{ whiteSpace: "nowrap" }}
+      className="topbar-whatsapp"
     >
       <i className="bi bi-whatsapp"></i>
-      <span className="d-none d-sm-inline">Need help? Call Us: +91 80728 12904</span>
+      <span>Need help? WhatsApp: +91 80728 12904</span>
     </a>
 
-  </div>
-
-  <style>
-    {`
-      .top-offer-strip {
-        font-size: 0.9rem;
-      }
-
-      .offer-timer h6 {
-        font-weight: 500;
-        margin: 0;
-      }
-
-      .offer-whatsapp i {
-        font-size: 1.2rem;
-      }
-
-      /* Small devices (<576px): only show icon */
-      @media (max-width: 575px) {
-        .offer-whatsapp span {
-          display: none;
-        }
-        .offer-timer {
-          font-size: 0.85rem;
-        }
-      }
-
-      /* Medium devices (sm - 576px to 767px) */
-      @media (min-width: 576px) and (max-width: 767px) {
-        .offer-timer {
-          font-size: 0.9rem;
-        }
-        .offer-whatsapp span {
-          font-size: 0.85rem;
-        }
-      }
-
-      /* Large devices (tablet & desktop) */
-      @media (min-width: 768px) {
-        .offer-timer {
-          font-size: 1rem;
-        }
-        .offer-whatsapp span {
-          font-size: 0.95rem;
-        }
-      }
-    `}
-  </style>
-</div>
-
-
-
-        
-        <div className="bg-black text-white py-2">
-  <div className="container d-flex align-items-center justify-content-between overflow-hidden">
+    {/* RIGHT ARROW */}
     <button
-      className="btn btn-link text-white p-0"
-      onClick={() =>
-        setCarouselIndex((prev) =>
-          prev === 0 ? carouselItems.length - 1 : prev - 1
-        )
-      }
-    >
-      <ChevronLeft size={18} />
-    </button>
-
-    <div className="flex-grow-1 position-relative overflow-hidden" style={{ height: "24px" }}>
-  {carouselItems.map((item, i) => {
-    const isActive = i === carouselIndex;
-    return (
-      <div
-        key={i}
-        className="carousel-text position-absolute top-50 start-50 translate-middle"
-        style={{
-          transition: "transform 0.3s ease, opacity 0.3s ease",
-          transform: isActive ? "translate(-50%, -50%)" : "translate(150%, -50%)",
-          opacity: isActive ? 1 : 0,
-          whiteSpace: "nowrap",
-          textAlign: "center",
-        }}
-      >
-        {item}
-      </div>
-    );
-  })}
-</div>
-
-
-    <button
-      className="btn btn-link text-white p-0"
+      className="topbar-arrow-btn topbar-right-arrow"
       onClick={() =>
         setCarouselIndex((prev) =>
           prev === carouselItems.length - 1 ? 0 : prev + 1
         )
       }
+      type="button"
+      aria-label="Next offer"
     >
-      <ChevronRight size={18} />
+      <ChevronRight size={16} />
     </button>
   </div>
 
-  
+  <style>
+    {`
+      .compact-topbar {
+        width: 100%;
+        height: 34px;
+        background: #000000;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+
+      .compact-topbar-inner {
+        position: relative;
+        width: 100%;
+        height: 34px;
+        display: flex;
+        align-items: center;
+      }
+
+      /* LEFT ARROW */
+      .topbar-left-arrow {
+        position: absolute;
+        left: 15%;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 3;
+      }
+
+      /* RIGHT ARROW */
+      .topbar-right-arrow {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 3;
+      }
+
+      .topbar-arrow-btn {
+        width: 24px;
+        height: 24px;
+        border: none;
+        background: transparent;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        cursor: pointer;
+      }
+
+      /* EXACT PAGE CENTER */
+      .topbar-carousel-area {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: 22px;
+        width: 520px;
+        max-width: 45vw;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .topbar-carousel-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        white-space: nowrap;
+        font-size: 13px;
+        font-weight: 600;
+        color: #ffffff;
+        transition: opacity 0.35s ease, transform 0.35s ease;
+        text-align: center;
+      }
+
+      /* FULL RIGHT SIDE */
+      .topbar-whatsapp {
+        position: absolute;
+        right: 52px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+        z-index: 2;
+      }
+
+      .topbar-whatsapp:hover {
+        color: #25d366;
+      }
+
+      .topbar-whatsapp i {
+        color: #25d366;
+        font-size: 15px;
+      }
+
+      @media (max-width: 991px) {
+        .topbar-left-arrow {
+          left: 14px;
+        }
+
+        .topbar-carousel-area {
+          width: 62vw;
+          max-width: 62vw;
+        }
+
+        .topbar-whatsapp {
+          display: none;
+        }
+
+        .topbar-carousel-text {
+          font-size: 12px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .compact-topbar,
+        .compact-topbar-inner {
+          height: 30px;
+        }
+
+        .topbar-carousel-area {
+          width: 70vw;
+          max-width: 70vw;
+          height: 20px;
+        }
+
+        .topbar-carousel-text {
+          font-size: 11px;
+        }
+
+        .topbar-arrow-btn {
+          width: 20px;
+          height: 20px;
+        }
+
+        .topbar-right-arrow {
+          right: 10px;
+        }
+      }
+    `}
+  </style>
 </div>
-
-
+        
         {/* MAIN NAVBAR */}
         <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
           <div className="container">

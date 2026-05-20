@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function RelatedProducts({
   related = [],
   currentProductId,
   toImageUrl,
   handleImgError,
+  API_URL,
 }) {
   const navigate = useNavigate();
+
+  const [reviewSummaries, setReviewSummaries] = useState({});
 
   const filteredProducts = related
     .filter((p) => {
@@ -15,6 +19,32 @@ export default function RelatedProducts({
       return String(relatedProductId) !== String(currentProductId);
     })
     .slice(0, 10);
+
+  useEffect(() => {
+    const loadRelatedReviewSummaries = async () => {
+      try {
+        const productIds = filteredProducts.map(
+          (p) => p.id || p._id || p.product_id
+        );
+
+        if (productIds.length === 0) return;
+
+        const { data } = await axios.post(
+          `${API_URL}/api/reviews/summary/bulk`,
+          {
+            product_ids: productIds,
+          }
+        );
+
+        setReviewSummaries(data.summaries || {});
+      } catch (error) {
+        console.error("Related product review summary failed:", error);
+        setReviewSummaries({});
+      }
+    };
+
+    loadRelatedReviewSummaries();
+  }, [related, currentProductId, API_URL]);
 
   if (filteredProducts.length === 0) {
     return (
@@ -68,6 +98,11 @@ export default function RelatedProducts({
               p.description ||
               "Premium natural product";
 
+            const ratingSummary = reviewSummaries[productId] || {
+              average_rating: 0,
+              total_reviews: 0,
+            };
+
             return (
               <article
                 className="related-product-card"
@@ -92,9 +127,18 @@ export default function RelatedProducts({
                 <div className="related-product-info">
                   <div className="related-rating-row">
                     <span className="related-star">★</span>
-                    <span className="related-rating-text">
-                      {p.rating || "4.8"} ({p.reviews || "20"} Reviews)
-                    </span>
+
+                    {ratingSummary.total_reviews > 0 ? (
+                      <span className="related-rating-text">
+                        {Number(ratingSummary.average_rating).toFixed(2)} (
+                        {ratingSummary.total_reviews} Review
+                        {ratingSummary.total_reviews !== 1 ? "s" : ""})
+                      </span>
+                    ) : (
+                      <span className="related-rating-text">
+                        No reviews yet
+                      </span>
+                    )}
                   </div>
 
                   <h3 className="related-product-title">{p.title}</h3>
@@ -161,10 +205,6 @@ const styles = `
 
   .related-products-scroll::-webkit-scrollbar {
     height: 6px;
-  }
-
-  .related-products-scroll::-webkit-scrollbar-track {
-    background: transparent;
   }
 
   .related-products-scroll::-webkit-scrollbar-thumb {

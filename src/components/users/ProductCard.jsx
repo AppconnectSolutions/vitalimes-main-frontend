@@ -158,6 +158,19 @@ export default function ProductCard({ product }) {
         </div>
 
         <Card.Body className="vitalimes-product-body">
+          <div className="product-rating-row">
+  <span className="product-rating-star">★</span>
+
+  {Number(product.total_reviews) > 0 ? (
+    <span className="product-rating-text">
+      {Number(product.average_rating || 0).toFixed(2)} (
+      {product.total_reviews} Review
+      {Number(product.total_reviews) !== 1 ? "s" : ""})
+    </span>
+  ) : (
+    <span className="product-no-rating-text">No reviews yet</span>
+  )}
+</div>
           <div className="product-mini-row">
             <span className="brand-chip">
               <Sparkles size={11} />
@@ -492,6 +505,32 @@ export default function ProductCard({ product }) {
             flex-wrap: wrap;
           }
         }
+
+        .product-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 22px;
+  margin-bottom: 10px;
+}
+
+.product-rating-star {
+  color: #ffad32;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.product-rating-text {
+  color: #333333;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.product-no-rating-text {
+  color: #777777;
+  font-size: 13px;
+  font-weight: 700;
+}
       `}</style>
     </>
   );

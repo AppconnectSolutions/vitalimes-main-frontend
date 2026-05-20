@@ -8,6 +8,7 @@ export default function AllProducts() {
         window.scrollTo(0, 0); // ✅ scroll to top
       }, []);
   const [products, setProducts] = useState([]);
+  const [reviewSummaries, setReviewSummaries] = useState({});
   const navigate = useNavigate();
 
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
@@ -55,6 +56,31 @@ export default function AllProducts() {
     };
     loadProducts();
   }, [API_URL]);
+
+
+  useEffect(() => {
+  const loadProductRatings = async () => {
+    try {
+      if (!products.length) return;
+
+      const productIds = products.map((product) => product.id);
+
+      const { data } = await axios.post(
+        `${API_URL}/api/reviews/summary/bulk`,
+        {
+          product_ids: productIds,
+        }
+      );
+
+      setReviewSummaries(data.summaries || {});
+    } catch (error) {
+      console.error("Failed to load product review summaries:", error);
+      setReviewSummaries({});
+    }
+  };
+
+  loadProductRatings();
+}, [products, API_URL]);
 
   return (
     <>
@@ -120,6 +146,11 @@ export default function AllProducts() {
           {products.map((product) => {
             const firstVariant = product.variants?.[0];
 
+            const ratingSummary = reviewSummaries[product.id] || {
+  average_rating: 0,
+  total_reviews: 0,
+};
+
             // Convert DB values -> MinIO URLs
             const img1 = toImageUrl(product.image1);
             const img2 = toImageUrl(product.image2 || product.image1);
@@ -136,6 +167,21 @@ export default function AllProducts() {
                   </div>
 
                   <div className="p-3">
+                    <div className="d-flex align-items-center gap-2 mb-2">
+  <span style={{ color: "#ffad32", fontSize: "18px" }}>★</span>
+
+  {ratingSummary.total_reviews > 0 ? (
+    <span style={{ fontSize: "14px", fontWeight: "500", color: "#333" }}>
+      {Number(ratingSummary.average_rating).toFixed(2)} (
+      {ratingSummary.total_reviews} Review
+      {ratingSummary.total_reviews !== 1 ? "s" : ""})
+    </span>
+  ) : (
+    <span style={{ fontSize: "14px", fontWeight: "500", color: "#777" }}>
+      No reviews yet
+    </span>
+  )}
+</div>
                     <h6 className="fw-bold product-title">
                       {product.title}
                       {product.units && (
