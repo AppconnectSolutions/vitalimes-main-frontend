@@ -158,15 +158,20 @@ export default function ProductCard({ product }) {
         </div>
 
         <Card.Body className="vitalimes-product-body">
-          <div className="product-rating-row">
-  <span className="product-rating-star">★</span>
-
+       <div className="product-rating-row">
   {Number(product.total_reviews) > 0 ? (
-    <span className="product-rating-text">
-      {Number(product.average_rating || 0).toFixed(2)} (
-      {product.total_reviews} Review
-      {Number(product.total_reviews) !== 1 ? "s" : ""})
-    </span>
+    <>
+      <span className="product-rating-stars">
+        {"★".repeat(Math.round(Number(product.average_rating || 0)))}
+        {"☆".repeat(5 - Math.round(Number(product.average_rating || 0)))}
+      </span>
+
+      <span className="product-rating-text">
+        {Number(product.average_rating || 0).toFixed(2)} (
+        {product.total_reviews} Review
+        {Number(product.total_reviews) !== 1 ? "s" : ""})
+      </span>
+    </>
   ) : (
     <span className="product-no-rating-text">No reviews yet</span>
   )}
@@ -514,10 +519,12 @@ export default function ProductCard({ product }) {
   margin-bottom: 10px;
 }
 
-.product-rating-star {
+.product-rating-stars {
   color: #ffad32;
   font-size: 18px;
   line-height: 1;
+  letter-spacing: 1px;
+  white-space: nowrap;
 }
 
 .product-rating-text {

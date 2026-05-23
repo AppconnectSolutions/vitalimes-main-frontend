@@ -168,14 +168,19 @@ export default function AllProducts() {
 
                   <div className="p-3">
                     <div className="d-flex align-items-center gap-2 mb-2">
-  <span style={{ color: "#ffad32", fontSize: "18px" }}>★</span>
-
   {ratingSummary.total_reviews > 0 ? (
-    <span style={{ fontSize: "14px", fontWeight: "500", color: "#333" }}>
-      {Number(ratingSummary.average_rating).toFixed(2)} (
-      {ratingSummary.total_reviews} Review
-      {ratingSummary.total_reviews !== 1 ? "s" : ""})
-    </span>
+    <>
+      <span style={{ color: "#ffad32", fontSize: "18px", letterSpacing: "1px" }}>
+        {"★".repeat(Math.round(Number(ratingSummary.average_rating)))}
+        {"☆".repeat(5 - Math.round(Number(ratingSummary.average_rating)))}
+      </span>
+
+      <span style={{ fontSize: "14px", fontWeight: "500", color: "#333" }}>
+        {Number(ratingSummary.average_rating).toFixed(2)} (
+        {ratingSummary.total_reviews} Review
+        {ratingSummary.total_reviews !== 1 ? "s" : ""})
+      </span>
+    </>
   ) : (
     <span style={{ fontSize: "14px", fontWeight: "500", color: "#777" }}>
       No reviews yet
