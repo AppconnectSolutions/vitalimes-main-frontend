@@ -13,33 +13,37 @@ export default function ProductDetails() {
 
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
   const MINIO_PUBLIC_URL =
-    import.meta.env.VITE_MINIO_PUBLIC_URL || "https://minio.appconnect.cloud";
-  const MINIO_BUCKET = import.meta.env.VITE_MINIO_BUCKET || "vitalimes-images";
+  import.meta.env.VITE_MINIO_PUBLIC_URL || "https://minio.vitalimes.com";
 
-  // Convert DB filename -> full MinIO URL
-  const toImageUrl = (filename) => {
-  if (!filename) return "";
+const MINIO_BUCKET =
+  import.meta.env.VITE_MINIO_BUCKET || "vitalimes-images";
+
+const PLACEHOLDER_IMAGE = "/assets/images/placeholder.png";
+
+// Convert DB filename -> full MinIO URL
+const toImageUrl = (filename) => {
+  if (!filename) return PLACEHOLDER_IMAGE;
 
   let key = String(filename).trim();
 
-  // If already full URL → fix old domain
+  // If already full URL, change old AppConnect domain to Vitalimes domain
   if (key.startsWith("http")) {
     return key.replace(
-      "https://minio.vitalimes.com",
-      "https://minio.appconnect.cloud"
+      "https://minio.appconnect.cloud",
+      "https://minio.vitalimes.com"
     );
   }
 
-  // remove leading slash
+  // Remove leading slash
   key = key.replace(/^\/+/, "");
 
-  // remove bucket prefix if exists
-  key = key.replace(/^vitalimes-images\//, "");
+  // Remove bucket prefix if already exists
+  key = key.replace(new RegExp(`^${MINIO_BUCKET}/`), "");
 
-  // encode safely
+  // Encode safely
   key = key.split("/").map(encodeURIComponent).join("/");
 
-  return `https://minio.appconnect.cloud/vitalimes-images/${key}`;
+  return `${MINIO_PUBLIC_URL}/${MINIO_BUCKET}/${key}`;
 };
 
   const [product, setProduct] = useState(null);

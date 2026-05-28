@@ -26,6 +26,37 @@ export default function ProductReviews({
   review_text: "",
 });
 
+
+const MINIO_PUBLIC_URL =
+  import.meta.env.VITE_MINIO_PUBLIC_URL || "https://minio.vitalimes.com";
+
+const MINIO_BUCKET =
+  import.meta.env.VITE_MINIO_BUCKET || "vitalimes-images";
+
+const PLACEHOLDER_IMAGE = "/assets/images/placeholder.png";
+
+const toImageUrl = (value) => {
+  if (!value) return PLACEHOLDER_IMAGE;
+
+  let key = String(value).trim();
+
+  // If full URL comes from old AppConnect domain, convert to Vitalimes domain
+  if (key.startsWith("http")) {
+    return key.replace(
+      "https://minio.appconnect.cloud",
+      "https://minio.vitalimes.com"
+    );
+  }
+
+  key = key.replace(/^\/+/, "");
+  key = key.replace(new RegExp(`^${MINIO_BUCKET}/`), "");
+  key = key.split("/").map(encodeURIComponent).join("/");
+
+  return `${MINIO_PUBLIC_URL}/${MINIO_BUCKET}/${key}`;
+};
+
+const reviewProductImage = toImageUrl(productImage);
+
   useEffect(() => {
     if (productId) {
       loadReviews();
@@ -414,13 +445,17 @@ if (typeof onReviewSubmitted === "function") {
                     experience.
                   </p>
 
-                  {productImage && (
-                    <img
-                      src={productImage}
-                      alt={productTitle}
-                      className="review-popup-product-image"
-                    />
-                  )}
+                  {reviewProductImage && (
+  <img
+    src={reviewProductImage}
+    alt={productTitle}
+    className="review-popup-product-image"
+    onError={(e) => {
+      e.currentTarget.onerror = null;
+      e.currentTarget.src = PLACEHOLDER_IMAGE;
+    }}
+  />
+)}
 
                   <h3 className="review-popup-product-title">
                     {productTitle}
