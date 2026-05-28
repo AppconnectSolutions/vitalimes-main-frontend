@@ -18,7 +18,7 @@ export default function ProductCard({ product }) {
   const productId = product.id || product._id || product.product_id;
 
   const MINIO_PUBLIC_URL =
-    import.meta.env.VITE_MINIO_PUBLIC_URL || "https://minio.appconnect.cloud";
+    import.meta.env.VITE_MINIO_PUBLIC_URL || "https://minio.vitalimes.com";
   const MINIO_BUCKET = import.meta.env.VITE_MINIO_BUCKET || "vitalimes-images";
 
   const toImageUrl = (val) => {
@@ -37,7 +37,7 @@ export default function ProductCard({ product }) {
     key = key.replace(/^vitalimes-images\//, "");
     key = key.split("/").map(encodeURIComponent).join("/");
 
-    return `https://minio.appconnect.cloud/vitalimes-images/${key}`;
+    return `${MINIO_PUBLIC_URL}/${MINIO_BUCKET}/${key}`;
   };
 
   const imageFront =
