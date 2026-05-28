@@ -18,27 +18,37 @@ export default function ProductCard({ product }) {
   const productId = product.id || product._id || product.product_id;
 
   const MINIO_PUBLIC_URL =
-    import.meta.env.VITE_MINIO_PUBLIC_URL || "https://minio.vitalimes.com";
-  const MINIO_BUCKET = import.meta.env.VITE_MINIO_BUCKET || "vitalimes-images";
+  import.meta.env.VITE_MINIO_PUBLIC_URL || "https://minio.vitalimes.com";
 
-  const toImageUrl = (val) => {
-    if (!val) return "";
+const MINIO_BUCKET =
+  import.meta.env.VITE_MINIO_BUCKET || "vitalimes-images";
 
-    let key = String(val).trim();
+const PLACEHOLDER_IMAGE = "/assets/images/placeholder.png";
 
-    if (key.startsWith("http")) {
-      return key.replace(
-        "https://minio.vitalimes.com",
-        "https://minio.appconnect.cloud"
-      );
-    }
+const toImageUrl = (val) => {
+  if (!val) return PLACEHOLDER_IMAGE;
 
-    key = key.replace(/^\/+/, "");
-    key = key.replace(/^vitalimes-images\//, "");
-    key = key.split("/").map(encodeURIComponent).join("/");
+  let key = String(val).trim();
 
-    return `${MINIO_PUBLIC_URL}/${MINIO_BUCKET}/${key}`;
-  };
+  // If already full URL, force AppConnect old URL to Vitalimes URL
+  if (key.startsWith("http")) {
+    return key.replace(
+      "https://minio.appconnect.cloud",
+      "https://minio.vitalimes.com"
+    );
+  }
+
+  // Remove leading slash
+  key = key.replace(/^\/+/, "");
+
+  // Remove bucket name if already present
+  key = key.replace(new RegExp(`^${MINIO_BUCKET}/`), "");
+
+  // Encode each path part
+  key = key.split("/").map(encodeURIComponent).join("/");
+
+  return `${MINIO_PUBLIC_URL}/${MINIO_BUCKET}/${key}`;
+};
 
   const imageFront =
     toImageUrl(product.image_url) || "/assets/images/placeholder.png";
