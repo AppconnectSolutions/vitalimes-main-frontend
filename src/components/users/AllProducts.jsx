@@ -27,8 +27,8 @@ export default function AllProducts() {
   // If full URL → replace old domain
   if (key.startsWith("http")) {
     return key.replace(
-      "https://minio.vitalimes.com",
-      "https://minio.appconnect.cloud"
+      "https://minio.appconnect.cloud",
+      "https://minio.vitalimes.com"
     );
   }
 
@@ -41,7 +41,7 @@ export default function AllProducts() {
   // encode
   key = key.split("/").map(encodeURIComponent).join("/");
 
-  return `https://minio.appconnect.cloud/vitalimes-images/${key}`;
+  return `${MINIO_PUBLIC_URL}/${MINIO_BUCKET}/${key}`;
 };
 
   // Load products from backend
